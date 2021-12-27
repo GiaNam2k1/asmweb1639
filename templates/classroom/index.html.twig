@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{%block body %}
+<div class="container-md col-md-8 text-center">
+    <a class="btn btn-primary mt-4 mb-4" href="{{path('teacher_add')}}">Add</a>
+    <table class="table table-striped|sm|bordered|hover|inverse table-inverse table-responsive">
+        <thead class="thead-inverse|thead-default">
+            <tr>
+                <th>STT</th>
+                <th>Tutor</th>
+                <th>Class Name</th>
+                <th></th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for c in classes %}
+                <tr>
+                    <td scope="row">{{c.id}}</td>
+                    <td>{{c.course}}</td>
+                    <td>{{c.classname}}</td>
+                    <td></td>
+                    <td>
+                        <a class="btn btn-warning" href="#">Edit</a>
+                        <a class="btn btn-danger" href="#"
+                        onclick="return confirm('Are you sure delete this teacher?')"
+                        >Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+    </table>
+</div>   
+    
+{%endblock %}
