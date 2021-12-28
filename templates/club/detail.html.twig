@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Club Name</th>
+				<th>Founded year</th>
+				<th>Image</th>
+				<th>Student(s)</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td scope="row">{{ club.name }}</td>
+				<td>{{ club.year }}</td>
+				<td>
+					<img src="{{ asset('images/'~club.image) }}" width="100" height="120">
+				</td>
+				<td>
+					{% if club.students != null %}
+
+						{% for student in club.students %}
+							<a href="{{ path('student_detail', {'id' : student.id }) }}">
+							{{student.name}}
+							</a>
+						{% endfor %}
+						
+					{% endif %}
+				</td>
+				<td>
+					<a href="{{ path('club_edit', {'id': club.id}) }}">
+					Edit
+					</a>
+				</td>
+				<td>
+					<a href="{{ path('club_delete', {'id': club.id}) }}"
+					onclick = "return confirm('Do you want to deletet this club?')">
+					Delete
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+{% endblock %}

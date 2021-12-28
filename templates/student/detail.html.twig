@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+				<th>Birthday</th>
+				<th>Phone</th>
+				<th>Club</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td scope="row">{{ student.id }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.birthday | date('d/m/Y') }} </td>
+				<td>{{ student.phone }}</td>
+				<td>
+					{% if (student.club != null) %}
+						{% for student in student.club %}
+							<a href="{{ path ('club_detail', {'id' : student.club.id })}}">
+							{{ student.club.name }}
+							</a>
+						{% endfor %}
+					{% endif %}
+				</td>
+				<td>
+                    <a class="btn btn-warning" href="{{ path('student_edit', {'id' : student.id })}}">
+                    Edit
+                    </a>
+                    <a class="btn btn-danger" href="{{ path('student_delete', {'id' : student.id }) }}"
+                    onclick = "return confirm('Do you want to delete this student ?')"
+                    >
+                    Delete
+                    </a>
+                  </td>
+            </tr>
+
+        </tbody>
+    </table>
+    
+{% endblock %}
