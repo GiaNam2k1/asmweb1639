@@ -69,7 +69,7 @@ class Club
     public function setImage($image)
     {
         if ($image != null) {
-            $this->cover = $image;
+            $this->image = $image;
         }
         return $this;
     }
