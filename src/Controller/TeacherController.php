@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Loader\Configurator\form;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 use function PHPUnit\Framework\throwException;
 
@@ -51,21 +52,24 @@ class TeacherController extends AbstractController
         );
     }
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/teacher/delete/{id}",name="teacher_delete")
      */
     public function teacherDelete($id){
         $teacher = $this->em->getRepository(Teacher::class)->find($id);
-        if($teacher==null){
+        if ($teacher == null) {
             $this->addFlash("Error","Delete this teacher failed");
-        }else{
+        } else {
             $manager = $this->em->getManager();
             $manager->remove($teacher);
             $manager->flush();
-            $this->addFlash("Succeed","Delete succeed");
+            $this->addFlash("Success","Delete succeed");
         }
-        return $this->redirect("teacher_index");
+        return $this->redirectToRoute("teacher_index");
+
     }
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/teacher/add", name = "teacher_add")
      */
     public function teacherAdd(Request $reqest){
@@ -107,6 +111,7 @@ class TeacherController extends AbstractController
         ]);  
     }
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/teacher/edit/{id}",name = "teacher_edit")
      */
     public function teacherEdit(Request $reqest,$id){

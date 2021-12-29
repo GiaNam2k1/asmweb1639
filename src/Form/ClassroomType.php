@@ -2,14 +2,15 @@
 
 namespace App\Form;
 
+use App\Entity\Teacher;
 use App\Entity\Classroom;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ClassroomType extends AbstractType
 {
@@ -39,8 +40,9 @@ class ClassroomType extends AbstractType
                 'label'=> 'Choice teacher',
                 'required'=>true,
                 'class'=>Teacher::class,
-                'mutiple'=>true,
-                'expanded'=>false
+                'choice_label'=> "name",
+                'multiple'=>true,
+                'expanded'=>true
             ])
         ;
     }

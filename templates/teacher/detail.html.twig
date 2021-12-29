@@ -27,7 +27,8 @@
                     </td>
                     
                     <td> {% for c in teacher.classes %}
-                        {{c.classname  }} 
+                    <a href="{{path('classroom_detail',{'id':c.id})}}"> {{c.classname  }} </a>
+                       
                         <br>
                     {% endfor %}
                     </td>
