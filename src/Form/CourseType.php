@@ -6,6 +6,7 @@ use App\Entity\Course;
 use App\Entity\CourseCategory;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +20,7 @@ class CourseType extends AbstractType
                 'label' => 'Course name',
                 'required' => true
             ])
-            ->add('CourseID', IntergerType::class,
+            ->add('CourseID', IntegerType::class,
             [
                 'label' => 'Course Id',
                 'required' => true
@@ -27,7 +28,7 @@ class CourseType extends AbstractType
             ])
             ->add('Description', TextType::class,
             [
-                'lable' => 'Description',
+                'label' => 'Description',
                 'required' => false,
                 'attr' => [
                     'minlength' => 10,
@@ -40,10 +41,10 @@ class CourseType extends AbstractType
                 'required' => true,
                 'class' => CourseCategory::class,
                 'choice_label' => 'Name',
-                'mutiple' => false,
+                'multiple' => false,
                 'expanded' =>true
             ])
-            ->add('classes')
+            // ->add('classes')
         ;
     }
 

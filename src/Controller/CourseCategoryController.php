@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\CourseType;
 use App\Entity\CourseCategory;
+use App\Form\CourseCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,7 +36,7 @@ class CourseCategoryController extends AbstractController
             return $this->redirectToRoute('course_category_index');
         }
         return $this->render('course_category/detail.html.twig',[
-            'course_category' => $coursecategory
+            'coursecategory' => $coursecategory
         ]);
     }
 
@@ -82,11 +83,11 @@ class CourseCategoryController extends AbstractController
             $manager = $this->em->getManager();
             $manager->persist($coursecategory);
             $manager->flush();
-            $this->addFlash("Success", "Edit course category succeed");
-            return $this->redirectToRoute('course_category_index');
+            $this->addFlash("Success", "Edit course succeed");
+            return $this->redirectToRoute('course_index');
         }
 
-        return $this->renderForm("course_category/edit.html.twig",[
+        return $this->renderForm("course/edit.html.twig",[
             'form' => $form
         ]);
     }

@@ -31,12 +31,12 @@ class CourseCategoryType extends AbstractType
             ])
             ->add('Courses', EntityType::class,
             [
-                'label' => 'Course',
-                'required' => true,
-                'class' => Course::class,
-                'choice_label' => 'Name',
-                'multiple' => false,
-                'expanded' =>true
+                'label'=> 'Course',
+                'required'=>true,
+                'class'=>Course::class,
+                'choice_label'=> "Name",
+                'multiple'=>true,
+                'expanded'=>true
             ])
         ;
     }
