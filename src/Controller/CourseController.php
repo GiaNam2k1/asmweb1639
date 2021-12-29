@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Course;
+use App\Form\CourseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,10 +21,10 @@ class CourseController extends AbstractController
     }
 
     #[Route('/courses', name: 'course_index')]
-    public function index(): Response
-    {
-        return $this->render('course/index.html.twig', [
-            'controller_name' => 'CourseController',
+    public function courseIndex() {
+        $courses = $this->em->getRepository(Course::class)->findAll();
+        return $this->render("course/index.html.twig",[
+            'courses' => $courses
         ]);
     }
 

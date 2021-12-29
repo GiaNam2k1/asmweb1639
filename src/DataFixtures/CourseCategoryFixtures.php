@@ -6,18 +6,17 @@ use App\Entity\CourseCategory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class CourseCategoryCategoryFixtures extends Fixture
+class CourseCategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
-        for ($i=1; $i<=5; $i++){
-            $coursecategory = new CourseCategory;
-            $coursecategory->setName("CourseCategory $i");
+        for ($i = 1; $i <= 5; $i++) {
+            $coursecategory = new CourseCategory();
+            $coursecategory->setName("Category $i");
             $coursecategory->setDescription("Description");
             $manager->persist($coursecategory);
         }
+
         $manager->flush();
     }
 }

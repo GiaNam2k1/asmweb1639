@@ -11,16 +11,16 @@
 	<div class="container mt-20" style="display: grid;  grid-template-columns: 30% 10% 31% 10% 0% 0%;">
 		{% for t in teachers %}
 			<div class="card" style="width:250px">
-				<img class="card-img-bottom" src="{{ asset('images/'~t.image) }}" style="width:100%">
+				<img class="card-img-bottom" src="{{ asset ('images/'~t.image) }}" style="width:100%">
 				<div class="card-body">
 					<h4 class="card-title">{{t.name}}</h4>
-					<a href="{{path('teacher_detail',{'id':t.id})}}" class="btn btn-primary">See Profile</a>
+					<a href="{{ path ('teacher_detail',{'id':t.id})}}" class="btn btn-primary">See Profile</a>
 					{% if is_granted('ROLE_ADMIN') %}
-						<a href="{{path('teacher_edit',{'id':t.id})}}">
+						<a href="{{ path ('teacher_edit',{'id':t.id})}}">
 							<image src="{{asset('images/edit.png')}}" width="50" height="40">
 						</a>
-						<a href="{{path('teacher_delete',{'id':t.id})}}" onclick="return confirm('Are you sure delete this teacher?')">
-							<image src="{{asset('images/delete.png')}}" width="50" height="40">
+						<a href="{{ path ('teacher_delete',{'id':t.id})}}" onclick="return confirm('Are you sure delete this teacher?')">
+							<image src="{{ asset ('images/delete.png')}}" width="50" height="40">
 						</a>
 					{% endif %}
 				</div>
