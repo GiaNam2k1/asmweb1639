@@ -8,7 +8,6 @@
     <table class="table table-striped|sm|bordered|hover|inverse table-inverse table-responsive">
         <thead class="thead-inverse|thead-default">
             <tr>
-                <th>STT</th>
                 <th>Course</th>
                 <th>Class Name</th>
                 {% if is_granted('ROLE_ADMIN') %}
@@ -19,9 +18,8 @@
             <tbody>
             {% for c in classes %}
                 <tr>
-                    <td scope="row">{{c.id}}</td>
                     <td>{{c.course}}</td>
-                    <td> <a href="{{path('classroom_detail',{'id':c.id})}}">{{c.classname}}</a></td>
+                    <td> <a href="{{path('classroom_detail',{'id':c.id})}}" style="text-decoration:none">{{c.classname}}</a></td>
                     {% if is_granted('ROLE_ADMIN') %}
                     <td>
                         <a class="btn btn-warning" href="{{path('classroom_edit',{'id':c.id})}}">Edit</a>

@@ -1,41 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {%block body %}
-<div class="container-md col-md-8 text-center">
-{% if is_granted('ROLE_ADMIN') %}
-    <a class="btn btn-primary mt-4 mb-4" href="{{path('teacher_add')}}">Add</a>
-    {% endif %}
-    <table class="table table-striped|sm|bordered|hover|inverse table-inverse table-responsive">
-        <thead class="thead-inverse|thead-default">
-            <tr>
-                <th>STT</th>
-                <th>Name</th>
-                <th>Image</th>
-                {% if is_granted('ROLE_ADMIN') %}
-                <th>Actions</th>
-                {% endif %}
-            </tr>
-            </thead>
-            <tbody>
-            {% for t in teachers %}
-                <tr>
-                    <td scope="row">{{t.id}}</td>
-                    <td><a href="{{path('teacher_detail',{'id':t.id})}}">{{t.name}}</a></td>
-                    <td>
-                        <img src="{{ asset('images/'~t.image) }}" wight="100" height="120">
-                    </td>
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <td>
-                        <a class="btn btn-warning" href="{{path('teacher_edit',{'id':t.id})}}">Edit</a>
-                        <a class="btn btn-danger" href="{{path('teacher_delete',{'id':t.id})}}"
-                        onclick="return confirm('Are you sure delete this teacher?')"
-                        >Delete</a>
-                    </td>
-                    {% endif %}
-                </tr>
-            </tbody>
-            {% endfor %}
-    </table>
-</div>   
-    
-{%endblock %}
+	{% if is_granted('ROLE_ADMIN') %}
+		<center>
+			<a href="{{path('teacher_add')}}">
+				<image src="{{asset('images/add.png')}}" width="100" height="90">
+			</a>
+		</center>
+	{% endif %}
+	<div class="container mt-20" style="display: grid;  grid-template-columns: 30% 10% 31% 10% 0% 0%;">
+		{% for t in teachers %}
+			<div class="card" style="width:250px">
+				<img class="card-img-bottom" src="{{ asset('images/'~t.image) }}" style="width:100%">
+				<div class="card-body">
+					<h4 class="card-title">{{t.name}}</h4>
+					<a href="{{path('teacher_detail',{'id':t.id})}}" class="btn btn-primary">See Profile</a>
+					{% if is_granted('ROLE_ADMIN') %}
+						<a href="{{path('teacher_edit',{'id':t.id})}}">
+							<image src="{{asset('images/edit.png')}}" width="50" height="40">
+						</a>
+						<a href="{{path('teacher_delete',{'id':t.id})}}" onclick="return confirm('Are you sure delete this teacher?')">
+							<image src="{{asset('images/delete.png')}}" width="50" height="40">
+						</a>
+					{% endif %}
+				</div>
+			</div>
+			<br>
+		{% endfor %}
+	</div>
+{% endblock %}
