@@ -46,7 +46,7 @@ class ClubController extends AbstractController
         ]);
     }
 
-    #[Route('/club/delete/{id}', name: 'club_delete')]
+    #[IsGranted("ROLE_ADMIN"), Route('/club/delete/{id}', name: 'club_delete')]
     public function clubDelete($id) {
         $club = $this->em->getRepository(Club::class)->find($id);
         if ($club == null) {
@@ -60,7 +60,7 @@ class ClubController extends AbstractController
         return $this->redirectToRoute("club_index");
     }
 
-    #[Route('/club/add', name: 'club_add')]
+    #[IsGranted("ROLE_ADMIN"), Route('/club/add', name: 'club_add')]
     public function clubAdd(Request $request) {
         $club = new Club();
         $form = $this->createForm(ClubType::class, $club);
@@ -96,7 +96,7 @@ class ClubController extends AbstractController
         
     }
 
-    #[Route('/club/edit/{id}', name: 'club_edit')]
+    #[IsGranted("ROLE_ADMIN"), Route('/club/edit/{id}', name: 'club_edit')]
     public function clubEdit(Request $request, $id) {
        $club = $this->em->getRepository(Club::class)->find($id);
        $form = $this->createForm(ClubType::class, $club);

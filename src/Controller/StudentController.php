@@ -43,7 +43,7 @@ class StudentController extends AbstractController
         ]);
     }
 
-    #[Route('/student/delete/{id}', name: 'student_delete')]
+    #[IsGranted("ROLE_ADMIN"), Route('/student/delete/{id}', name: 'student_delete')]
     public function studentDelete($id) {
         $student = $this->em->getRepository(Student::class)->find($id);
         if ($student == null) {
@@ -57,7 +57,7 @@ class StudentController extends AbstractController
         return $this->redirectToRoute('student_index');
     }
 
-    #[Route('/student/add', name: 'student_add')]
+    #[IsGranted("ROLE_ADMIN"), Route('/student/add', name: 'student_add')]
     public function studentAdd(Request $request) {
         $student = new Student();
         $form = $this->createForm(StudentType::class, $student);
@@ -76,7 +76,7 @@ class StudentController extends AbstractController
         ]);
     }
     
-    #[Route('/student/edit/{id}', name: 'student_edit')]
+    #[IsGranted("ROLE_ADMIN"), Route('/student/edit/{id}', name: 'student_edit')]
     public function studentEdit(Request $request, $id) {
         $student = $this->em->getRepository(Student::class)->find($id);
         $form = $this->createForm(StudentType::class, $student);
