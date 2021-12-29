@@ -9,48 +9,42 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-class CourseType extends AbstractType
+
+class CourseCategoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('Name', TextType::class,
             [
-                'label' => 'Course name',
+                'label' => 'Course Category Name',
                 'required' => true
-            ])
-            ->add('CourseID', IntergerType::class,
-            [
-                'label' => 'Course Id',
-                'required' => true
-
             ])
             ->add('Description', TextType::class,
             [
-                'lable' => 'Description',
+                'label' => 'Desciption',
                 'required' => false,
                 'attr' => [
                     'minlength' => 10,
-                    'maxlength' => 20
+                    'maxlength' => 50
                 ]
             ])
-            ->add('courseCategory', EntityType::class,
+            ->add('Courses', EntityType::class,
             [
-                'label' => 'Course Category',
+                'label' => 'Course',
                 'required' => true,
-                'class' => CourseCategory::class,
+                'class' => Course::class,
                 'choice_label' => 'Name',
-                'mutiple' => false,
+                'multiple' => false,
                 'expanded' =>true
             ])
-            ->add('classes')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Course::class,
+            'data_class' => CourseCategory::class
         ]);
     }
 }
