@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{%block body %}
+<div class="container-md col-md-8 text-center">
+
+    <a class="btn btn-primary mt-4 mb-4" href="{{path('classroom_index')}}">
+        Return
+    </a>
+    <table class="table table-striped|sm|bordered|hover|inverse table-inverse table-responsive">
+        <thead class="thead-inverse|thead-default">
+            <tr>
+                <th>Course</th>
+                <th>Classname</th>
+                <th>Tutor</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{class.course}}</td>
+                <td>{{class.classname}}</td>
+                <td> {% for t in class.teachers %}
+                <a href="{{path('teacher_detail',{'id':t.id})}}"> {{t.name}} </a> 
+                <br>
+                {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>   
+    
+{%endblock %}

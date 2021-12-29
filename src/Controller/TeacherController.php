@@ -57,15 +57,16 @@ class TeacherController extends AbstractController
      */
     public function teacherDelete($id){
         $teacher = $this->em->getRepository(Teacher::class)->find($id);
-        if($teacher==null){
+        if ($teacher == null) {
             $this->addFlash("Error","Delete this teacher failed");
-        }else{
+        } else {
             $manager = $this->em->getManager();
             $manager->remove($teacher);
             $manager->flush();
-            $this->addFlash("Succeed","Delete succeed");
+            $this->addFlash("Success","Delete succeed");
         }
-        return $this->redirect("teacher_index");
+        return $this->redirectToRoute("teacher_index");
+
     }
     /**
      * @IsGranted("ROLE_ADMIN")
