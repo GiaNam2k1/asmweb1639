@@ -77,25 +77,17 @@ class TeacherController extends AbstractController
         $form = $this->createForm(TeacherType::class,$teacher);
         $form->handleRequest($reqest);  
         if ($form->isSubmitted() && $form->isValid()) {
-        #upload ảnh
-        #lấy tên ảnh từ file upload
         $image = $teacher->getImage();
-        #đặt tên mới cho file ảnh=>đảm bảo tên ảnh là duy nhất
         $imageName = uniqid();
-        #lấy đuôi ảnh  
         $imgExtension = $image->guessExtension();
-        #nối tên mới vs đuôi để complete
         $imgName = $imageName.".".$imgExtension;
-        #di chuyển ảnh vào thư mục và add vào db
         try {
             $image->move(
                 $this->getParameter('image_teacher'),$imgName
-                #đường dãn thư mục chứa ảnh ở file config/severice.yaml
             );
         } catch (FileException $e) {
             throwException($e);
         }
-        #luu tên ảnh vào đb
         $teacher->setImage($imgName);
 
             $manager = $this->em->getManager();
@@ -120,33 +112,22 @@ class TeacherController extends AbstractController
         $form->handleRequest($reqest); 
         
         if ($form->isSubmitted() && $form->isValid()) {
-            //code upload và xử lý tên ảnh
-            //B1: lấy dữ liệu ảnh từ form
             $file = $form['image']->getData(); 
-            //B2: check xem dữ liệu ảnh có null không
-            if ($file != null) { //người dùng bấm select file để update ảnh mới
-                //B3: lấy tên ảnh từ file upload
+            if ($file != null) {
                 $image = $teacher->getImage();
-                #đặt tên mới cho file ảnh=>đảm bảo tên ảnh là duy nhất
                 $imageName = uniqid();
-                #lấy đuôi ảnh  
                 $imgExtension = $image->guessExtension();
-                #nối tên mới vs đuôi để complete
                 $imgName = $imageName.".".$imgExtension;
-                #di chuyển ảnh vào thư mục và add vào db
                 try {
                     $image->move(
                         $this->getParameter('image_teacher'),$imgName
-                        #đường dãn thư mục chứa ảnh ở file config/severice.yaml
                     );
                 } catch (FileException $e) {
                     throwException($e);
                 }
-                #luu tên ảnh vào đb
                 $teacher->setImage($imgName);
             }
 
-            
             $manager = $this->em->getManager();
             $manager->persist($teacher);
             $manager->flush();
