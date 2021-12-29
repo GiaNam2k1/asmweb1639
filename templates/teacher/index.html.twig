@@ -4,14 +4,15 @@
 	{% if is_granted('ROLE_ADMIN') %}
 		<center>
 			<a href="{{path('teacher_add')}}">
-				<image src="{{asset('images/add.png')}}" width="100" height="90">
+				<image src="{{asset('images/addperson.jpg')}}" class="rounded-circle" width="100" height="90">
 			</a>
 		</center>
 	{% endif %}
 	<div class="container mt-20" style="display: grid;  grid-template-columns: 30% 10% 31% 10% 0% 0%;">
 		{% for t in teachers %}
-			<div class="card" style="width:250px">
-				<img class="card-img-bottom" src="{{ asset('images/'~t.image) }}" style="width:100%">
+			<div class="card bg-dark text-light" style="width:250px">
+				<center style="margin-top:5px">
+                <img class="rounded-circle" src="{{ asset('images/'~t.image) }}"  style="width:90%; height:70%">
 				<div class="card-body">
 					<h4 class="card-title">{{t.name}}</h4>
 					<a href="{{path('teacher_detail',{'id':t.id})}}" class="btn btn-primary">See Profile</a>
@@ -24,6 +25,7 @@
 						</a>
 					{% endif %}
 				</div>
+                </center>
 			</div>
 			<br>
 		{% endfor %}

@@ -1,37 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{%block body %}
-<div class="container-md col-md-8 text-center">
-{% if is_granted('ROLE_ADMIN') %}
-    <a class="btn btn-primary mt-4 mb-4" href="{{path('classroom_add')}}">Add</a>
-    {% endif %}
-    <table class="table table-striped|sm|bordered|hover|inverse table-inverse table-responsive">
-        <thead class="thead-inverse|thead-default">
-            <tr>
-                <th>Course</th>
-                <th>Class Name</th>
-                {% if is_granted('ROLE_ADMIN') %}
-                <th>Actions</th>
-                {% endif %}
-            </tr>
-            </thead>
-            <tbody>
-            {% for c in classes %}
-                <tr>
-                    <td>{{c.course}}</td>
-                    <td> <a href="{{path('classroom_detail',{'id':c.id})}}" style="text-decoration:none">{{c.classname}}</a></td>
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <td>
-                        <a class="btn btn-warning" href="{{path('classroom_edit',{'id':c.id})}}">Edit</a>
-                        <a class="btn btn-danger" href="{{path('classroom_delete',{'id':c.id})}}"
-                        onclick="return confirm('Are you sure delete this classroom?')"
-                        >Delete</a>
-                    </td>
-                    {% endif %}
-                </tr>
-            </tbody>
-            {% endfor %}
-    </table>
-</div>   
-    
+{% block body %}
+	<div class="container-md col-md-8 text-center">
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{path('teacher_add')}}">
+				<image src="{{asset('images/addclass.png')}}" class="rounded-circle" width="100" height="90">
+			</a>
+		{% endif %}
+		<table class="table table-dark">
+			<thead class="thead-inverse|thead-default">
+				<tr>
+					<th>Course</th>
+					<th>Class Name</th>
+					{% if is_granted('ROLE_ADMIN') %}
+						<th>Actions</th>
+					{% endif %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for c in classes %}
+					<tr>
+						<td>{{c.course}}</td>
+						<td>
+							<a href="{{path('classroom_detail',{'id':c.id})}}" style="text-decoration:none">{{c.classname}}</a>
+						</td>
+						{% if is_granted('ROLE_ADMIN') %}
+							<td>
+								<a href="{{path('classroom_edit',{'id':c.id})}}">
+									<image src="{{asset('images/edit.png')}}" width="50" height="40">
+
+								</a>
+								<a href="{{path('classroom_delete',{'id':c.id})}}" onclick="return confirm('Are you sure delete this classroom?')">
+									<image src="{{asset('images/delete.png')}}" width="50" height="40">
+								</a>
+							</td>
+						{% endif %}
+					</tr>
+				</tbody>
+			{% endfor %}
+		</table>
+	</div>
+
 {%endblock %}
