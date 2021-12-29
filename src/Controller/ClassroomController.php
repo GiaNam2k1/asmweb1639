@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\ManagerRegistry as DoctrineManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ClassroomController extends AbstractController
 {
