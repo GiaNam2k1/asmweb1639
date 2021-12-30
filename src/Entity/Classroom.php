@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ClassroomRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Course;
+use App\Entity\Teacher;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ClassroomRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ClassroomRepository::class)]
 class Classroom
@@ -20,9 +22,6 @@ class Classroom
 
     #[ORM\Column(type: 'string', length: 10)]
     private $classname;
-
-    #[ORM\ManyToMany(targetEntity: Course::class, mappedBy: 'classes')]
-    private $courses;
 
     #[ORM\ManyToMany(targetEntity: Teacher::class, inversedBy: 'classrooms')]
     private $teachers;
