@@ -13,6 +13,7 @@
 			<tr>
 				<th>Course ID</th>
 				<th>Course Name</th>
+				<th>Image</th>
 				<th>Description</th>
 				{% if is_granted('ROLE_ADMIN') %}
 				<th>Actions</th>
@@ -26,6 +27,10 @@
 					<td>
 						<a href="{{ path ('course_detail', {'id': course.id })}}" style="text-decoration:none">
 							{{ course.Name }}</a>
+					</td>
+					<td> <a href="{{ path('course_detail', {'id' : course.id} )}}">
+							<img src="{{ asset('images/'~course.image) }}" wight="100" height="120">
+						</a>
 					</td>
 					<td>
 						{{ course.Description }}

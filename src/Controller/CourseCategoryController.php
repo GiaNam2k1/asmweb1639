@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
+use Monolog\Handler\Handler;
 
 class CourseCategoryController extends AbstractController
 {
@@ -59,7 +60,7 @@ class CourseCategoryController extends AbstractController
     public function coursecategoryAdd(Request $request) {
         $coursecategory = new CourseCategory();
         $form = $this->createForm(CourseCategoryType::class, $coursecategory);
-        $form->handleRequest($request);
+        $form ->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) { 
             $manager = $this->em->getManager();

@@ -17,6 +17,7 @@ class CourseFixtures extends Fixture
             $course->setName("Course $i");
             $course->setCourseID("0123456790");
             $course->setDescription("Description");
+            $course->setImage('avatar.jpg');
             $manager->persist($course);
         }
         $manager->flush();

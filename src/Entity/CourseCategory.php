@@ -71,7 +71,6 @@ class CourseCategory
     {
         if (!$this->courses->contains($course)) {
             $this->courses[] = $course;
-            $course->setCourseCategory($this);
         }
 
         return $this;
@@ -79,12 +78,7 @@ class CourseCategory
 
     public function removeCourse(Course $course): self
     {
-        if ($this->courses->removeElement($course)) {
-            // set the owning side to null (unless already changed)
-            if ($course->getCourseCategory() === $this) {
-                $course->setCourseCategory(null);
-            }
-        }
+        $this->courses->removeElement($course);
 
         return $this;
     }

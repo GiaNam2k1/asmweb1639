@@ -6,6 +6,7 @@
 parameters:
     club_image: '%kernel.project_dir%/public/images'
     image_teacher: '%kernel.project_dir%/public/images'
+    course_image: '%kernel.project_dir%/public/images'
 services:
     # default configuration for services in *this* file
     _defaults:
