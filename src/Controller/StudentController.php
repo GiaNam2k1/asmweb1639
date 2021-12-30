@@ -11,8 +11,11 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\ManagerRegistry as DoctrineManagerRegistry;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Required;
+
+use function PHPUnit\Framework\throwException;
 
 class StudentController extends AbstractController
 {
@@ -64,6 +67,22 @@ class StudentController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) { 
+            $cover = $student->getCover();
+            $imgName = uniqid();
+            $imgExtension = $cover->guessExtension();
+            $imageName = $imgName . "." . $imgExtension;
+
+            try {
+                $cover->move(
+                    $this->getParameter('student_cover'), $imageName
+                );
+            } catch (FileException $e) {
+                throwException($e);
+            }
+
+            $student->setCover($imageName);
+
+
             $manager = $this->em->getManager();
             $manager->persist($student);
             $manager->flush();
@@ -83,6 +102,25 @@ class StudentController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) { 
+            $file = $form['cover']->getData();
+
+           if ($file != null) {
+               $cover = $student->getCover();
+               $imgName = uniqid();
+               $imgExtension = $cover->guessExtension();
+               $imageName = $imgName . "." . $imgExtension;
+
+               try {
+                   $cover->move(
+                       $this->getParameter('student_cover'), $imageName
+                   );
+               } catch (FileException $e) {
+                   throwException($e);
+               }
+
+               $student->setCover($imageName);
+           }
+
             $manager = $this->em->getManager();
             $manager->persist($student);
             $manager->flush();

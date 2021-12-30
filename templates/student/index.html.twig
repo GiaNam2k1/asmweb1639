@@ -12,6 +12,7 @@
 				<tr>
 					<th>Student ID</th>
 					<th>Student Name</th>
+					<th>Student Image</th>
 					{% if is_granted('ROLE_ADMIN') %}
 						<th>Actions</th>
 					{% endif %}
@@ -24,6 +25,11 @@
 						<td>
 							<a href="{{ path ('student_detail', {'id': student.id })}}" style="text-decoration:none">
 								{{ student.name }}</a>
+						</td>
+						<td>
+							<a href="{{ path ('student_detail', {'id' : student.id} )}}">
+								<img src="{{ asset ('images/'~student.cover) }}" wight="100" height="120">
+							</a>
 						</td>
 						{% if is_granted('ROLE_ADMIN') %}
 							<td>
