@@ -21,16 +21,16 @@ class Classroom
     #[ORM\Column(type: 'string', length: 10)]
     private $classname;
 
-    #[ORM\ManyToMany(targetEntity: Teacher::class, mappedBy: 'classes')]
-    private $teachers;
-
     #[ORM\ManyToMany(targetEntity: Course::class, mappedBy: 'classes')]
     private $courses;
 
+    #[ORM\ManyToMany(targetEntity: Teacher::class, inversedBy: 'classrooms')]
+    private $teachers;
+
     public function __construct()
     {
-        $this->teachers = new ArrayCollection();
         $this->courses = new ArrayCollection();
+        $this->teachers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,32 +62,6 @@ class Classroom
         return $this;
     }
 
-    /**
-     * @return Collection|Teacher[]
-     */
-    public function getTeachers(): Collection
-    {
-        return $this->teachers;
-    }
-
-    public function addTeacher(Teacher $teacher): self
-    {
-        if (!$this->teachers->contains($teacher)) {
-            $this->teachers[] = $teacher;
-            $teacher->addClass($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTeacher(Teacher $teacher): self
-    {
-        if ($this->teachers->removeElement($teacher)) {
-            $teacher->removeClass($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Course[]
@@ -112,6 +86,30 @@ class Classroom
         if ($this->courses->removeElement($course)) {
             $course->removeClass($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Teacher[]
+     */
+    public function getTeachers(): Collection
+    {
+        return $this->teachers;
+    }
+
+    public function addTeacher(Teacher $teacher): self
+    {
+        if (!$this->teachers->contains($teacher)) {
+            $this->teachers[] = $teacher;
+        }
+
+        return $this;
+    }
+
+    public function removeTeacher(Teacher $teacher): self
+    {
+        $this->teachers->removeElement($teacher);
 
         return $this;
     }

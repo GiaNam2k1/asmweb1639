@@ -41,7 +41,7 @@ class CourseType extends AbstractType
                 'required' => true,
                 'class' => CourseCategory::class,
                 'choice_label' => 'Name',
-                'multiple' => false,
+                'multiple' => true,
                 'expanded' =>true
             ])
             // ->add('classes')

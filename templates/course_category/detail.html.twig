@@ -1,42 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <table class="table">
-        <thead>
+	<div class="container-md col-md-8 ">
+	<a class="btn btn-primary mt-4 mb-4" href="{{path('course_category_index')}}">
+        Return
+    </a>
+    
+    <table class="table table-dark text-center">
+        <thead class="thead-inverse|thead-default">
             <tr>
                 <th>Course Category Name</th>
 				<th>Description</th>
 				<th>Course</th>
-                <th>Actions</th>
             </tr>
         </thead>
-        <tbody>,
-
+        <tbody>			
             <tr>
                 <td>{{ coursecategory.Name }}</td>
 				<td>{{ coursecategory.Description }}</td>
 				<td>
-					{% if coursecategory.courses != null %}
+					{% if coursecategory.Courses != null %}
 
-						{% for course in coursecategory.courses %}
-							<a href="{{ path('course_detail', {'id' : course.id }) }}">
+						{% for course in coursecategory.Courses %}
+							<a href="{{ path('course_detail', {'id' : course.id }) }}" style="text-decoration:none">
 							{{course.Name}} <br>
 							</a>
 						{% endfor %}
 						
 					{% endif %}
 				</td>
-				{% if is_granted('ROLE_ADMIN') %}
-					<td>
-						<a href="{{ path('course_category_edit', {'id' : coursecategory.id })}}">
-						</a>
-						<a href="{{ path('course_category_delete', {'id' : coursecategory.id }) }}" onclick="return confirm('Do you want to delete this course category ?')">
-						</a>
-					</td>
-				{% endif %}
             </tr>
 
         </tbody>
     </table>
-    
+    </div>
 {% endblock %}

@@ -33,12 +33,12 @@ class Teacher
     #[ORM\Column(type: 'string', length: 255)]
     private $image;
 
-    #[ORM\ManyToMany(targetEntity: Classroom::class, inversedBy: 'teachers')]
-    private $classes;
+    #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'teachers')]
+    private $classrooms;
 
     public function __construct()
     {
-        $this->classes = new ArrayCollection();
+        $this->classrooms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,24 +123,29 @@ class Teacher
     /**
      * @return Collection|Classroom[]
      */
-    public function getClasses(): Collection
+    public function getClassrooms(): Collection
     {
-        return $this->classes;
+        return $this->classrooms;
     }
 
-    public function addClass(Classroom $class): self
+    public function addClassroom(Classroom $classroom): self
     {
-        if (!$this->classes->contains($class)) {
-            $this->classes[] = $class;
+        if (!$this->classrooms->contains($classroom)) {
+            $this->classrooms[] = $classroom;
+            $classroom->addTeacher($this);
         }
 
         return $this;
     }
 
-    public function removeClass(Classroom $class): self
+    public function removeClassroom(Classroom $classroom): self
     {
-        $this->classes->removeElement($class);
+        if ($this->classrooms->removeElement($classroom)) {
+            $classroom->removeTeacher($this);
+        }
 
         return $this;
     }
+
+    
 }
