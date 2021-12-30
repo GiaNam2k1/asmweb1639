@@ -24,7 +24,7 @@ class Course
     #[ORM\Column(type: 'string', length: 255)]
     private $Description;
 
-    #[ORM\ManyToOne(targetEntity: CourseCategory::class, inversedBy: 'Courses')]
+    #[ORM\ManyToOne(targetEntity: CourseCategory::class, inversedBy: 'courses')]
     private $courseCategory;
 
     #[ORM\ManyToMany(targetEntity: Classroom::class, inversedBy: 'courses')]

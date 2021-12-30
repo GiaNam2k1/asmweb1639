@@ -43,9 +43,7 @@ class CourseType extends AbstractType
                 'choice_label' => 'Name',
                 'multiple' => true,
                 'expanded' =>true
-            ])
-            // ->add('classes')
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
