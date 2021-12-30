@@ -22,11 +22,12 @@ class CourseCategory
     private $Description;
 
     #[ORM\OneToMany(mappedBy: 'courseCategory', targetEntity: Course::class)]
-    private $Courses;
+    private $courses;
 
     public function __construct()
     {
         $this->Courses = new ArrayCollection();
+        $this->courses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -63,13 +64,13 @@ class CourseCategory
      */
     public function getCourses(): Collection
     {
-        return $this->Courses;
+        return $this->courses;
     }
 
     public function addCourse(Course $course): self
     {
-        if (!$this->Courses->contains($course)) {
-            $this->Courses[] = $course;
+        if (!$this->courses->contains($course)) {
+            $this->courses[] = $course;
             $course->setCourseCategory($this);
         }
 
@@ -78,7 +79,7 @@ class CourseCategory
 
     public function removeCourse(Course $course): self
     {
-        if ($this->Courses->removeElement($course)) {
+        if ($this->courses->removeElement($course)) {
             // set the owning side to null (unless already changed)
             if ($course->getCourseCategory() === $this) {
                 $course->setCourseCategory(null);
@@ -87,4 +88,5 @@ class CourseCategory
 
         return $this;
     }
+
 }
