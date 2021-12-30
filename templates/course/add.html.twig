@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<div class="container col-md-6 mt-3 mb-3">
+<div class="container col-md-6 mt-3 mb-3" style="border: 3px solid black;background-color:#424242;color:white">
    <h2 class="text-center">Add new Course</h2>
    <div class="col md-6"></div>
    {{ form_start (form) }}
@@ -37,7 +37,7 @@
             })
          }}
       </div>
-      <div class="form-group text-center mt-3">
+      <div class="form-group text-center mt-3 mb-3">
          <input class="btn btn-primary" type="submit" value="Add">
       </div>
    {{ form_end (form) }}
