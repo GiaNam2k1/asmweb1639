@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="container col-md-6 mt-3 mb-3" style="border: 3px solid black;background-color:#424242;color:white">
-   <h2 class="text-center">EDIT STUDENT</h2>
+   <h2 class="text-center">EDIT Course Category</h2>
    <div class="col md-6"></div>
    {{ form_start (form) }}
       <div class="form-group">
@@ -22,8 +22,8 @@
          }}
       </div>
 	  <div class="form-group">
-         {{ form_label (form.Courses) }}
-         {{ form_widget (form.Courses,
+         {{ form_label (form.courses) }}
+         {{ form_widget (form.courses,
             {
                'attr' : {'class' : 'form-control'}
             })
