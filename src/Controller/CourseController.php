@@ -63,6 +63,7 @@ class CourseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) { 
             $manager = $this->em->getManager();
             $manager->persist($course);
+            $manager->flush();;
             $manager->flush();
             $this->addFlash("Success", "Add course succeed");
             return $this->redirectToRoute('course_index');
