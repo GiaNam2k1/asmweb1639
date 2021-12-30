@@ -21,7 +21,7 @@
 
 				<td>
 					{% if course.courseCategory != null %}
-							<a href="{{ path ('course_detail', {'id' : course.courseCategory.id }) }}" style="text-decoration:none">
+							<a href="{{ path ('course_category_detail', {'id' : course.courseCategory.id }) }}" style="text-decoration:none">
 								{{course.courseCategory.Name}}
 								<br>
 							</a>
