@@ -1,45 +1,53 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<div class="container col-md-6 mt-3 mb-3" style="border: 3px solid black;background-color:#424242;color:white">
-   <h2 class="text-center">EDIT STUDENT</h2>
-   <div class="col md-6"></div>
-   {{ form_start (form) }}
-      <div class="form-group">
-         {{ form_label (form.name) }}
-         {{ form_widget (form.name,
+	<div class="container col-md-6 mt-3 mb-3" style="border: 3px solid black;background-color:#424242;color:white">
+		<h2 class="text-center">EDIT STUDENT</h2>
+		<div class="col md-6"></div>
+		{{ form_start (form) }}
+		<div class="form-group">
+			{{ form_label (form.name) }}
+			{{ form_widget (form.name,
             {
                'attr' : {'class' : 'form-control'}
             })
          }}
-      </div>
-      <div class="form-group">
-         {{ form_label (form.birthday) }}
-         {{ form_widget (form.birthday,
+		</div>
+		<div class="form-group">
+			{{ form_label (form.birthday) }}
+			{{ form_widget (form.birthday,
             {
                'attr' : {'class' : 'form-control'}
             })
          }}
-      </div>
-	  <div class="form-group">
-         {{ form_label (form.phone) }}
-         {{ form_widget (form.phone,
+		</div>
+		<div class="form-group">
+			{{ form_label (form.phone) }}
+			{{ form_widget (form.phone,
             {
                'attr' : {'class' : 'form-control'}
             })
          }}
-      </div>
-	  <div class="form-group">
-         {{ form_label (form.club) }}
-         {{ form_widget (form.club,
+		</div>
+		<div class="form-group">
+			{{ form_label (form.cover) }}
+			{{ form_widget (form.cover,
             {
                'attr' : {'class' : 'form-control'}
             })
          }}
-      </div>
-      <div class="form-group text-center mt-3 mb-3">
-         <input class="btn btn-primary" type="submit" value="Update">
-      </div>
-   {{ form_end (form) }}
-</div>
+		</div>
+		<div class="form-group">
+			{{ form_label (form.club) }}
+			{{ form_widget (form.club,
+            {
+               'attr' : {'class' : 'form-control'}
+            })
+         }}
+		</div>
+		<div class="form-group text-center mt-3 mb-3">
+			<input class="btn btn-primary" type="submit" value="Update">
+		</div>
+		{{ form_end (form) }}
+	</div>
 {% endblock %}

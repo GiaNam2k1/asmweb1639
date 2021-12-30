@@ -29,6 +29,14 @@
             })
          }}
       </div>
+      <div class="form-group">
+         {{ form_label (form.cover) }}
+         {{ form_widget (form.cover,
+            {
+               'attr' : {'class' : 'form-control'}
+            })
+         }}
+      </div>
 	  <div class="form-group">
          {{ form_label (form.club) }}
          {{ form_widget (form.club,

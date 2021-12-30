@@ -15,6 +15,7 @@ class StudentFixtures extends Fixture
             $student->setName("Student $i");
             $student->setBirthday(\DateTime::createFromFormat('Y-m-d', '2000-10-20'));
             $student->setPhone("0123456778");
+            $student->setCover("club.jpg");
             $manager->persist($student);
         }
 

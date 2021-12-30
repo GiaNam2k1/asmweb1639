@@ -25,6 +25,9 @@ class Student
     #[ORM\ManyToOne(targetEntity: Club::class, inversedBy: 'students')]
     private $club;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $cover;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,19 @@ class Student
     {
         $this->club = $club;
 
+        return $this;
+    }
+
+    public function getCover()
+    {
+        return $this->cover;
+    }
+
+    public function setCover($cover)
+    {
+        if ($cover != null) {
+            $this->cover = $cover;
+        }
         return $this;
     }
 }
