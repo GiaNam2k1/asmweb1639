@@ -37,15 +37,13 @@ class CourseType extends AbstractType
             ])
             ->add('courseCategory', EntityType::class,
             [
-              
                 'label' => 'Course Category',
                 'required' => true,
                 'class' => CourseCategory::class,
-                'choice_label' => 'name',
-                'multiple' => false,
-                'expanded' => true
-            ])
-        ;
+                'choice_label' => 'Name',
+                'multiple' => true,
+                'expanded' =>true
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -28,7 +28,7 @@
 						{% if is_granted('ROLE_ADMIN') %}
 							<td>
 								<a href="{{ path ('student_edit', {'id' : student.id }) }}">
-									<img src="{{ asset('images/edit.png') }}" width="50" height="50">
+									<img src="{{ asset('images/edit.jpg') }}" width="50" height="50">
 								</a>
 								<a href="{{ path ('student_delete', {'id' : student.id }) }}" onclick="return confirm('Do you want to delete this student ?')">
 									<img src="{{ asset ('images/delete.jpg') }}" width="70" height="50">
