@@ -19,15 +19,16 @@
 				<td scope="row">{{ club.name }}</td>
 				<td>{{ club.year }}</td>
 				<td>
-					<img src="{{ asset('images/'~club.image) }}" width="140" height="120">
+					<img src="{{ asset('images/'~club.image) }}" width="150" height="120">
 				</td>
 				<td>
 					{% if club.students != null %}
 
 						{% for student in club.students %}
-							<a href="{{ path('student_detail', {'id' : student.id }) }}">
-							{{student.name}} <br>
+							<a class="link-warning" href="{{ path('student_detail', {'id' : student.id }) }}">
+							{{student.name}}
 							</a>
+							<br><br>
 						{% endfor %}
 						
 					{% endif %}
@@ -41,7 +42,7 @@
 				<td>
 					<a href="{{ path('club_delete', {'id': club.id}) }}"
 					onclick = "return confirm('Do you want to deletet this club?')">
-					<img src="{{ asset('images/delete.jpg') }}" width="70" height="50">
+					<img src="{{ asset('images/delete.jpg') }}" width="65" height="50">
 					</a>
 				</td>
 				{% endif %}

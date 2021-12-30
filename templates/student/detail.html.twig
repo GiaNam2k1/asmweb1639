@@ -10,7 +10,8 @@
 				<th>Phone</th>
 				<th>Club</th>
 				{% if is_granted('ROLE_ADMIN') %}
-					<th>Actions</th>
+					<th>Edit</th>
+					<th>Delete</th>
 				{% endif %}
 			</tr>
 		</thead>
@@ -25,7 +26,7 @@
 				<td>
 					{% if (student.club != null) %}
 
-						<a href="{{ path ('club_detail', {'id' : student.club.id })}}">
+						<a class="btn btn-outline-dark" href="{{ path ('club_detail', {'id' : student.club.id })}}">
 							{{ student.club.name }}
 						</a>
 
@@ -36,6 +37,8 @@
 						<a href="{{ path ('student_edit', {'id' : student.id })}}">
 							<img src="{{ asset ('images/edit.jpg') }}" width="50" height="50">
 						</a>
+					</td>
+					<td>
 						<a href="{{ path ('student_delete', {'id' : student.id }) }}" onclick="return confirm('Do you want to delete this student ?')">
 							<img src="{{ asset ('images/delete.jpg') }}" width="70" height="50">
 						</a>
