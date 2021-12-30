@@ -7,6 +7,7 @@
 			<tr>
 				<th>Course Name</th>
 				<th>CourseID</th>
+				<th>Image</th>
 				<th>Description</th>
 				<th>Course</th>
 				<th>Actions</th>
@@ -17,6 +18,7 @@
 			<tr>
 				<td scope="row">{{ course.CourseID }}</td>
 				<td>{{ course.Name }}</td>
+				<td><img src="{{ asset('images/'~course.image) }}" wight="100" height="120"></td>
 				<td>{{ course.Description }}</td>
 
 				<td>

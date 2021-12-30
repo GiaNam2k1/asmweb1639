@@ -27,6 +27,9 @@ class Course
     #[ORM\ManyToOne(targetEntity: CourseCategory::class, inversedBy: 'courses')]
     private $courseCategory;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $image;
+
 
 
     public function getId(): ?int
@@ -82,4 +85,16 @@ class Course
         return $this;
     }
 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        if ($image != null) {
+            $this->image = $image;
+        }
+        return $this;
+    }
 }

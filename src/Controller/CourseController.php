@@ -10,7 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Http\RememberMe\PersistentRememberMeHandler;
+
+use function PHPUnit\Framework\throwException;
 
 class CourseController extends AbstractController
 {   
@@ -60,15 +63,29 @@ class CourseController extends AbstractController
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
         
-        if ($form->isSubmitted() && $form->isValid()) { 
+        if($form->isSubmitted() && $form->isValid()) {
+            $images = $course->getImage();
+            $imgName = uniqid();
+            $imgExtension = $images->guessExtension();
+            $imageName = $imgName . "." . $imgExtension;
+
+            try {
+                $images->move(
+                    $this->getParameter('course_image'), $imageName
+                );
+            } catch (FileException $e) {
+                throwException($e);
+            }
+
+            $course->setImage($imageName);
+
             $manager = $this->em->getManager();
             $manager->persist($course);
-            $manager->flush();;
             $manager->flush();
+
             $this->addFlash("Success", "Add course succeed");
             return $this->redirectToRoute('course_index');
         }
-
         return $this->renderForm("course/add.html.twig",[
             'form' => $form
         ]);
@@ -80,7 +97,26 @@ class CourseController extends AbstractController
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
         
-        if ($form->isSubmitted() && $form->isValid()) { 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form['image']->getData();
+
+            if ($file != null) {
+                $images = $course->getImage();
+                $imgName = uniqid();
+                $imgExtension = $images->guessExtension();
+                $imageName = $imgName . "." . $imgExtension;
+ 
+                try {
+                    $images->move(
+                        $this->getParameter('course_image'), $imageName
+                    );
+                } catch (FileException $e) {
+                    throwException($e);
+                }
+ 
+                $course->setImage($imageName);
+            }
+
             $manager = $this->em->getManager();
             $manager->persist($course);
             $manager->flush();
