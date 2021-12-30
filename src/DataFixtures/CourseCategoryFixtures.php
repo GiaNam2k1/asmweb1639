@@ -10,13 +10,12 @@ class CourseCategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i=1; $i<=5; $i++){
             $coursecategory = new CourseCategory();
-            $coursecategory->setName("Category $i");
+            $coursecategory->setName("Course Category $i");
             $coursecategory->setDescription("Description");
             $manager->persist($coursecategory);
         }
-
         $manager->flush();
     }
 }
