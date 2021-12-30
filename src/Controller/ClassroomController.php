@@ -76,9 +76,6 @@ class ClassroomController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) { 
             $manager = $this->em->getManager();
-            // if($class->getTeachers() != null){
-            //     return $this->redirectToRoute("teacher_index");
-            // }
             $manager->persist($class);
             $manager->flush();
             $this->addFlash("Success","Add classroom succeed !");

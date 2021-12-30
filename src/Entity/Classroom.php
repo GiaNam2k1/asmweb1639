@@ -70,25 +70,6 @@ class Classroom
         return $this->courses;
     }
 
-    public function addCourse(Course $course): self
-    {
-        if (!$this->courses->contains($course)) {
-            $this->courses[] = $course;
-            $course->addClass($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCourse(Course $course): self
-    {
-        if ($this->courses->removeElement($course)) {
-            $course->removeClass($this);
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|Teacher[]
      */

@@ -36,6 +36,9 @@ class Teacher
     #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'teachers')]
     private $classrooms;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $city;
+
     public function __construct()
     {
         $this->classrooms = new ArrayCollection();
@@ -143,6 +146,18 @@ class Teacher
         if ($this->classrooms->removeElement($classroom)) {
             $classroom->removeTeacher($this);
         }
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
