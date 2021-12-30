@@ -5,11 +5,12 @@ namespace App\Controller;
 use App\Form\CourseType;
 use App\Entity\CourseCategory;
 use App\Form\CourseCategoryType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 
 class CourseCategoryController extends AbstractController
 {
@@ -40,7 +41,7 @@ class CourseCategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/course_category/delete/{id}', name: 'course_category_delete')]
+    #[IsGranted("ROLE_ADMIN"), Route('/course_category/delete/{id}', name: 'course_category_delete')]
     public function coursecategoryDelete($id) {
         $coursecategory = $this->em->getRepository(CourseCategory::class)->find($id);
         if ($coursecategory == null) {
@@ -54,7 +55,7 @@ class CourseCategoryController extends AbstractController
         return $this->redirectToRoute('course_category_index');
     }
 
-    #[Route('/course_category/add', name: 'course_category_add')]
+    #[IsGranted("ROLE_ADMIN"), Route('/course_category/add', name: 'course_category_add')]
     public function coursecategoryAdd(Request $request) {
         $coursecategory = new CourseCategory();
         $form = $this->createForm(CourseCategoryType::class, $coursecategory);
@@ -73,7 +74,7 @@ class CourseCategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/course_category/edit/{id}', name: 'course_category_edit')]
+    #[IsGranted("ROLE_ADMIN"), Route('/course_category/edit/{id}', name: 'course_category_edit')]
     public function coursecategoryEdit(Request $request, $id) {
         $coursecategory = $this->em->getRepository(CourseCategory::class)->find($id);
         $form = $this->createForm(CourseCategoryType::class, $coursecategory);
@@ -83,11 +84,11 @@ class CourseCategoryController extends AbstractController
             $manager = $this->em->getManager();
             $manager->persist($coursecategory);
             $manager->flush();
-            $this->addFlash("Success", "Edit course succeed");
-            return $this->redirectToRoute('course_index');
+            $this->addFlash("Success", "Edit course category succeed");
+            return $this->redirectToRoute('course_category_index');
         }
 
-        return $this->renderForm("course/edit.html.twig",[
+        return $this->renderForm("course_category/edit.html.twig",[
             'form' => $form
         ]);
     }

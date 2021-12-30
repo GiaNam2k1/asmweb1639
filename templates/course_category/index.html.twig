@@ -1,18 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{% if is_granted('ROLE_ADMIN') %}
-		<a class="btn btn-primary" href="{{ path('course_category_add')}}">
-			Add
+<div class="container-md col-md-8 text-center">
+	{% if is_granted('ROLE_ADMIN') %}
+		<a href="{{ path('course_category_add')}}">
+			<img src="{{ asset('images/add.jpg') }}" width="50" height="50">
 		</a>
 	{% endif %}
-<table class="table">
-		<thead>
+
+	<table class="table table-dark">
+		<thead class="thead-inverse|thead-default">
 			<tr>
 				<th>ID</th>
 				<th>Course Category Name</th>
 				<th>Description</th>
+				{% if is_granted('ROLE_ADMIN') %}
 				<th>Actions</th>
+				{% endif %}
 			</tr>
 		</thead>
 		<tbody>
@@ -20,26 +24,27 @@
 				<tr>
 					<td scope="row">{{ coursecategory.id }}</td>
 					<td>
-						<a href="{{ path('course_category_detail', {'id': coursecategory.id })}}">
+						<a href="{{ path('course_category_detail', {'id': coursecategory.id })}}" style="text-decoration:none">
 							{{ coursecategory.Name }}</a>
 					</td>
 					<td>
-						<a href="{{ path('course_category_detail', {'id': coursecategory.id })}}">
-							{{ coursecategory.Description }}</a>
+
+						{{ coursecategory.Description }}
 					</td>
+					{% if is_granted('ROLE_ADMIN') %}
 					<td>
-						<a href="{{ path('course_category_edit', {'id' : coursecategory.id }) }}">
+						<a class="btn btn-warning" href="{{ path('course_category_edit', {'id' : coursecategory.id }) }}">
 							Edit
 						</a>
-					</td>
-					<td>
-						<a href="{{ path('course_category_delete', {'id' : coursecategory.id }) }}" 
-                        onclick="return confirm('Do you want to delete this course ?')">
+					
+						<a class="btn btn-danger" href="{{ path('course_category_delete', {'id' : coursecategory.id }) }}" onclick="return confirm('Do you want to delete this course ?')">
 							Delete
 						</a>
 					</td>
+					{% endif %}
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
+	</div>
 {% endblock %}

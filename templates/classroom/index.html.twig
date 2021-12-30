@@ -3,7 +3,7 @@
 {% block body %}
 	<div class="container-md col-md-8 text-center">
 		{% if is_granted('ROLE_ADMIN') %}
-			<a href="{{path('teacher_add')}}">
+			<a href="{{path('classroom_add')}}">
 				<image src="{{asset('images/addclass.png')}}" class="rounded-circle" width="100" height="90">
 			</a>
 		{% endif %}

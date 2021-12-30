@@ -5,8 +5,8 @@
 {% block nav %} {% endblock %}
 
 {% block body %}
-<div class="container text-center col-5 mt-3">
-    <h1 class="text-primary text-uppercase">Account Registration</h1>
+<div class="container text-center col-5 mt-3" style="border: 3px solid black;background-color:#424242;color:white">
+    <h1 class="text-primary text-uppercase" >Account Registration</h1>
 
     {{ form_start(registrationForm) }}
     <div class="form-control">
@@ -24,7 +24,7 @@
         <button type="submit" class="btn btn-primary">Register</button>
     {{ form_end(registrationForm) }}
     <br>
-    <a href="{{ path('app_login')}}">Do you already have an account?</a>
+    <a href="{{ path('app_login')}}"  class="text-info">Do you already have an account?</a>
 </div>
 {% endblock %}
 

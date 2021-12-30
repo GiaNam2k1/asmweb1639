@@ -6,7 +6,7 @@
 {% block nav %}{% endblock %}
 
 {% block body %}
-	<div class="container col-md-6">
+	<div class="container col-md-6" style="border: 3px solid black;background-color:#424242;color:white">
 		<div class="container-fluid">
 			{% for message in app.session.flashbag.get('Warning') %}
 				<p class="alert alert-danger">

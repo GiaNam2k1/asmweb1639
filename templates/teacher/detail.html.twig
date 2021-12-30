@@ -6,7 +6,7 @@
     <a class="btn btn-primary mt-4 mb-4" href="{{path('teacher_index')}}">
         Return
     </a>
-    <table class="table table-striped|sm|bordered|hover|inverse table-inverse table-responsive">
+    <table class="table table-dark">
         <thead class="thead-inverse|thead-default">
             <tr>
                 <th>Name</th>
@@ -26,8 +26,8 @@
                         <img src="{{ asset ('images/'~teacher.image) }}" class="rounded-circle" wight="100" height="120">
                     </td>
                     
-                    <td> {% for c in teacher.classes %}
-                    <a href="{{ path ('classroom_detail',{'id':c.id})}}"> {{c.classname  }} </a>
+                    <td> {% for c in teacher.classrooms %}
+                    <a href="{{ path ('classroom_detail',{'id':c.id})}}" style="text-decoration:none"> {{c.classname  }} </a>
                        
                         <br>
                     {% endfor %}
